@@ -1,6 +1,37 @@
-# Getting Started with Create React App
+# React Typescript using Material UI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Dependencies
+
+1. React
+2. React-router-dom
+3. Redux
+4. React-redux
+5. Redux-observable
+6. Material-ui/core
+7. Material-ui/icons
+
+## Code Architecture
+We try to implement hexagonal architecture by splitting Service (model/entity), repository and views.
+In other hand we also try to combine with MVVN pattern, so in this adaptation we create rules:
+
+**Services -> Model and ModelView** = In this part we split every model each domain and create business logic for every domain. We use agnostic rules in this part, so we are not consider frontend framework. 
+
+**Views -> View** = We use react library to provide the UI
+
+**Repositories** = This part to communicate with external resources
+
+### Code structure
+
+* **/public**
+* **/src**
+  + **/repositories**
+  + **/services**
+  + **/views**
+    + **/components** # Store reusable component
+    + **/layouts** # Store reusable layout (single page layout, dashboard layout, error page layout, etc)
+    + **/pages** # Base on routes
+    + **/routes** # Store routes map
+    + **/stores** # Global state (action, reducer and middleware)
 
 ## Available Scripts
 
@@ -44,3 +75,4 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
