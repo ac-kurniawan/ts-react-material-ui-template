@@ -1,17 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import {Theme} from "./theme";
+import {CssBaseline, MuiThemeProvider} from "@material-ui/core";
+import {Router} from "./views/routes";
+import {Provider} from "react-redux";
+import {lastPresenceEpic, rootReducer} from "./views/stores";
+import {combineEpics, createEpicMiddleware} from "redux-observable";
+import {applyMiddleware, createStore} from "redux";
+import {composeWithDevTools} from "redux-devtools-extension";
+
+const _epicMiddleware = createEpicMiddleware();
+
+const _rootEpic = combineEpics(lastPresenceEpic)
+
+const _store = createStore(
+	rootReducer,
+	composeWithDevTools(applyMiddleware(_epicMiddleware))
+)
+
+_epicMiddleware.run(_rootEpic)
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+	<React.StrictMode>
+		<Provider store={_store}>
+			<MuiThemeProvider theme={Theme}>
+				<CssBaseline />
+				<Router />
+			</MuiThemeProvider>
+		</Provider>
+	</React.StrictMode>,
+	document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

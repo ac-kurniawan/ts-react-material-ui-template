@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "outDir": "./dist",
+    "target": "es6",
     "lib": [
+      "es6",
       "dom",
       "dom.iterable",
       "esnext"
@@ -17,10 +19,16 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "jsx": "react-jsx",
+    "noEmit": true
   },
   "include": [
     "src"
-  ]
+  ],
+  "resolutions": {
+    "styled-components": "^5"
+  }
 }
